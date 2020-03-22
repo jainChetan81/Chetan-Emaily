@@ -9,12 +9,12 @@ const express = require("express"),
 require("./models/User");
 require("./services/passport");
 mongoose.connect(keys.mongoURI);
-authRouts(app); //or  authRouts = require("./routes/authRoutes")(app)
 app.use(
     cookieSession({ maxAge: 30 * 24 * 60 * 60 * 1000, keys: [keys.cookie] })
 );
 app.use(passport.initialize());
 app.use(passport.session());
+authRouts(app); //or  authRouts = require("./routes/authRoutes")(app)
 app.listen(PORT, () => {
     console.log("app is listening on port 5000");
 });

@@ -34,9 +34,7 @@ passport.use(
                         name: profile.displayName
                     })
                         .save()
-                        .then(user => {
-                            done(null, user);
-                        });
+                        .then(user => done(null, user));
                 }
             });
         }
