@@ -1,14 +1,20 @@
 const express = require("express"),
-    passport = require("passport"),
-    googleStrategy = require("passport-google-oauth20").Strategy,
     PORT = process.env.PORT || 5000,
-    app = express();
-app.get("/", (req, res) => {
-    res.send({ hi: "there" });
-});
-
-passport.use(new googleStrategy());
+    cookieSession = require("cookie-session"),
+    passport = require("passport"),
+    mongoose = require("mongoose"),
+    keys = require("./config/keys"),
+    app = express(),
+    authRouts = require("./routes/authRoutes");
+require("./models/User");
+require("./services/passport");
+mongoose.connect(keys.mongoURI);
+authRouts(app); //or  authRouts = require("./routes/authRoutes")(app)
+app.use(
+    cookieSession({ maxAge: 30 * 24 * 60 * 60 * 1000, keys: [keys.cookie] })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 app.listen(PORT, () => {
     console.log("app is listening on port 5000");
 });
-
