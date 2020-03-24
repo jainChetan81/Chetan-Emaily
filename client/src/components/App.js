@@ -5,13 +5,11 @@ import "materialize-css/dist/css/materialize.min.css";
 
 function App() {
     return (
-        <div className="App">
+        <div className="container">
             <Router>
                 <Header />
                 <Route path="/">
-                    <a
-                        href="/auth/google"
-                        rel="noopener noreferrer">
+                    <a href="/auth/google" rel="noopener noreferrer">
                         Learn React
                     </a>
                 </Route>
