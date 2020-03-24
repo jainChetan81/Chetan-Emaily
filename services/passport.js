@@ -28,14 +28,12 @@ passport.use(
                 done(null, existingUser); //null means no error
                 //done means we are done here
             }
-            if (!existingUser) {
-                console.log("we have a new user : ", profile.displayName);
-                const User = await new User({
-                    googleId: profile.id,
-                    name: profile.displayName
-                }).save();
-                done(null, user);
-            }
+            console.log("we have a new user : ", profile.displayName);
+            const User = await new User({
+                googleId: profile.id,
+                name: profile.displayName
+            }).save();
+            done(null, user);
         }
     )
 );
