@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from "./Header";
 import { connect } from "react-redux";
 import * as actions from "../actions";
@@ -17,7 +17,7 @@ class App extends Component {
                     <Header />
                     <Route path="/">
                         <a href="/auth/google" rel="noopener noreferrer">
-                            Learn React
+                            Log in to google
                         </a>
                     </Route>
                 </Router>
