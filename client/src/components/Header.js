@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
+import Payments from "./Payments";
 
 class Header extends Component {
     renderContent() {
@@ -8,17 +10,32 @@ class Header extends Component {
             case null:
                 return "Still deciding";
             case false:
-                return "I am logged out";
+                return (
+                    <li>
+                        <a href="/auth/google">Log In</a>
+                    </li>
+                );
             default:
-                return "i am logged in";
+                return [
+                    <li>
+                        <Payments />
+                    </li>,
+                    <li>
+                        <a href="/api/logout">Log Out</a>
+                    </li>,
+                ];
         }
     }
     render() {
         return (
             <nav>
                 <div className="nav-wrapper">
-                    <p className="left-brand-logo">Emaily</p>
-                    <ul id="nav-mobile" className="right hide-on-med-and-down">
+                    <NavLink
+                        className="left brand-logo"
+                        to={this.props.auth ? "/surveys" : "/"}>
+                        Emaily
+                    </NavLink>
+                    <ul className="right">
                         <li>
                             <a href="sass.html">{this.renderContent()}</a>
                         </li>
@@ -28,7 +45,7 @@ class Header extends Component {
         );
     }
 }
-// function mapStateToProps({ auth }) {
-//     return { auth };
-// }
-export default connect()(Header);
+function mapStateToProps({ auth }) {
+    return { auth };
+}
+export default connect(mapStateToProps)(Header);
