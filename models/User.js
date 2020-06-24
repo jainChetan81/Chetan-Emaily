@@ -3,9 +3,10 @@ const mongoose = require("mongoose"),
     UserSchema = new Schema({
         googleId: String,
         name: String,
+        credits: { type: Number, default: 0 },
         createdAt: {
             type: Date,
-            default: Date.now()
-        }
+            default: Date.now(),
+        },
     });
 mongoose.model("User", UserSchema);

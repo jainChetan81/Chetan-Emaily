@@ -17,10 +17,13 @@ class Header extends Component {
                 );
             default:
                 return [
-                    <li>
+                    <li key="1">
                         <Payments />
                     </li>,
-                    <li>
+                    <li style={{ margin: "0 10px" }} key="3">
+                        Credits: {this.props.auth.credits}
+                    </li>,
+                    <li key="2">
                         <a href="/api/logout">Log Out</a>
                     </li>,
                 ];
@@ -35,17 +38,13 @@ class Header extends Component {
                         to={this.props.auth ? "/surveys" : "/"}>
                         Emaily
                     </NavLink>
-                    <ul className="right">
-                        <li>
-                            <a href="sass.html">{this.renderContent()}</a>
-                        </li>
-                    </ul>
+                    <ul className="right">{this.renderContent()}</ul>
                 </div>
             </nav>
         );
     }
 }
 function mapStateToProps({ auth }) {
-    return { auth };
+    return { auth: auth };
 }
 export default connect(mapStateToProps)(Header);
