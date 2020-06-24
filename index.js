@@ -10,7 +10,10 @@ const express = require("express"),
     bodyParser = require("body-parser");
 require("./models/User");
 require("./services/passport");
-mongoose.connect(keys.mongoURI);
+mongoose.connect(keys.mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
 app.use(bodyParser.json());
 app.use(
     cookieSession({ maxAge: 30 * 24 * 60 * 60 * 1000, keys: [keys.cookie] })

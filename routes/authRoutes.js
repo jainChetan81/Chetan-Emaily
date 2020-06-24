@@ -12,7 +12,7 @@ module.exports = (app) => {
             failureRedirect: "/auth/google",
         }),
         (req, res) => {
-            res.redirect("http://localhost:3000/surveys");
+            res.redirect("/surveys");
         }
     );
     app.get("/api/current_user", (req, res) => {
