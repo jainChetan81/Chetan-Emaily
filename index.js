@@ -7,8 +7,11 @@ const express = require("express"),
     app = express(),
     authRoutes = require("./routes/authRoutes"),
     billingRoutes = require("./routes/billingRoutes"),
-    bodyParser = require("body-parser");
+    bodyParser = require("body-parser"),
+    surveyRoutes = require("./routes/surveyRoutes");
+
 require("./models/User");
+require("./models/Survey");
 require("./services/passport");
 mongoose.connect(keys.mongoURI, {
     useNewUrlParser: true,
@@ -22,6 +25,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 authRoutes(app);
 billingRoutes(app); //or  authRouts = require("./routes/authRoutes")(app)
+surveyRoutes(app);
 if (process.env.NODE_ENV === "production") {
     //express will serve up production assest
     //like  our main.js or main.css files
