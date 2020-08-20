@@ -23,9 +23,11 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+
 authRoutes(app);
 billingRoutes(app); //or  authRouts = require("./routes/authRoutes")(app)
 surveyRoutes(app);
+
 if (process.env.NODE_ENV === "production") {
     //express will serve up production assest
     //like  our main.js or main.css files

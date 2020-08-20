@@ -1,5 +1,9 @@
 module.exports = (req, res, next) => {
-    if (!req.user.credits < 1)
-        res.status(403).send({ error: "Not Enough Credits!" });
-    next(); //if nothing wrong then continue to wherever you where
+    console.log("require credits");
+    if (req.user.credits < 1) {
+        console.log("not enouugh credits");
+        return res.status(403).send({ error: "Not enough credits!" });
+    }
+
+    next();
 };

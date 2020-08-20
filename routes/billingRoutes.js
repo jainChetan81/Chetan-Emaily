@@ -3,7 +3,8 @@ const keys = require("../config/keys"),
     requireLogin = require("../middlewares/requireLogin");
 module.exports = (app) => {
     app.post("/api/stripe", requireLogin, (req, res) => {
-        //no parantheses so that function is only called internall not everytime we load
+        console.log("api/stripe :", req.user);
+        //no parantheses so that function is only called internal not everytime we load
         stripe.charges
             .create({
                 amount: 500,
@@ -12,7 +13,7 @@ module.exports = (app) => {
                 source: req.body.id,
             })
             .then((charge) => {
-                req.user.credits += 5;
+                req.user.credits += 5; //add credits
                 req.user.save().then((user) => {
                     res.send(user);
                 });

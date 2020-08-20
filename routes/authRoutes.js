@@ -12,7 +12,9 @@ module.exports = (app) => {
             failureRedirect: "/auth/google",
         }),
         (req, res) => {
-            res.redirect("localhost:3000/surveys");
+            if (process.env.NODE_ENV === "production")
+                res.redirect("http://chetan-emaily.herokuapp.com/surveys");
+            res.redirect("http://localhost:3000/surveys");
         }
     );
     app.get("/api/current_user", (req, res) => {

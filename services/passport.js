@@ -3,13 +3,12 @@ const passport = require("passport"),
     googleStrategy = require("passport-google-oauth20").Strategy,
     keys = require("../config/keys"),
     User = mongoose.model("User");
+
 passport.serializeUser((user, done) => {
-    console.log("serializing user : ", user.id);
     done(null, user.id);
 });
 passport.deserializeUser((id, done) => {
     User.findById(id).then((user) => {
-        console.log("serializing user : ", user.id);
         done(null, user);
     });
 });
