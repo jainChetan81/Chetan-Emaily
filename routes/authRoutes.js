@@ -1,4 +1,5 @@
 const passport = require("passport");
+const keys = require("../config/keys");
 module.exports = (app) => {
     app.get(
         "/auth/google",
@@ -12,9 +13,7 @@ module.exports = (app) => {
             failureRedirect: "/auth/google",
         }),
         (req, res) => {
-            if (process.env.NODE_ENV === "production")
-                res.redirect("http://chetan-emaily.herokuapp.com/surveys");
-            res.redirect("http://localhost:3000/surveys");
+            res.redirect(`${keys.redirectDomain}/surveys`);
         }
     );
     app.get("/api/current_user", (req, res) => {

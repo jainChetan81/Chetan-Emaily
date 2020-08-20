@@ -1,40 +1,12 @@
 const mongoose = require("mongoose");
-const { Schema } = mongoose;
+const Schema = mongoose.Schema;
 //TODO: create a model for feedback form which takes questions and return answers
-const feedbackSchema = new Schema({
+let feedbackSchema = new Schema({
     question1: {
         type: String,
         required: true,
-        answer: {
-            type: Boolean,
-            default: null,
-        },
     },
     question2: {
-        type: String,
-        required: false,
-        answer: {
-            type: Boolean,
-            default: null,
-        },
-    },
-    question3: {
-        type: String,
-        required: false,
-        answer: {
-            type: Boolean,
-            default: null,
-        },
-    },
-    question4: {
-        type: String,
-        required: false,
-        answer: {
-            type: Boolean,
-            default: null,
-        },
-    },
-    question5: {
         type: String,
         required: false,
         answer: {
@@ -47,4 +19,4 @@ const feedbackSchema = new Schema({
     lastResponded: Date,
 });
 
-mongoose.model("Feedback", feedbackSchema);
+module.exports = mongoose.model("Feedback", feedbackSchema);

@@ -8,12 +8,13 @@ const express = require("express"),
     authRoutes = require("./routes/authRoutes"),
     billingRoutes = require("./routes/billingRoutes"),
     bodyParser = require("body-parser"),
-    surveyRoutes = require("./routes/surveyRoutes");
+    surveyRoutes = require("./routes/surveyRoutes"),
+    feedbackRoutes = require("./routes/feedbackRoutes");
 
 require("./models/User");
 require("./models/Survey");
-require("./services/passport");
 require("./models/FeedBack");
+require("./services/passport");
 mongoose.connect(keys.mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -27,6 +28,7 @@ app.use(passport.session());
 
 authRoutes(app);
 billingRoutes(app); //or  authRouts = require("./routes/authRoutes")(app)
+feedbackRoutes(app);
 surveyRoutes(app);
 
 if (process.env.NODE_ENV === "production") {

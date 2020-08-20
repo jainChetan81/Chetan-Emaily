@@ -1,33 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import queryString from "query-string";
-//TODO: extract value of s=which survey and which person from URL
-// Todo: take the values and send survey finished_state
 
 const Form = ({ location }) => {
+    const [feedbackForm, setFeedbackForm] = useState(null);
     useEffect(() => {
-        const parse = queryString.parse(location.search);
-        console.log("parsed info by queryString: ", parse);
-        console.log(location.search);
+        const { feedBackId } = queryString.parse(location.search);
+        console.log("parsed info by queryString: ", feedBackId);
+        axios
+            .post("/api/feedbackForm", { feedback_id: feedBackId })
+            .then((res) => {
+                console.log("respond of :", res.data);
+                setFeedbackForm(feedBackId);
+            })
+            .catch((err) => console.log("error in feedback Form.js: ", err));
         return () => {
             console.log("return useeffect");
         };
     }, [location.search]);
-    return <div>Hi this is where your form will be</div>;
-    //  TODO: Create A Survey Form with availabe email Id</div>;
+    return (
+        <div>
+            {feedbackForm ? (
+                <h1>Hi this is where your form will be</h1>
+            ) : (
+                <h1>Loading...</h1>
+            )}
+        </div>
+    );
+    //TODO: find person using UserId
 };
-
-// import React, { Component } from "react";
-
-// class Form extends Component {
-//     componentDidMount() {
-//         console.log("window: ", window.location.href);
-//         const parse = queryString.parse(window.location.search);
-//         console.log("parsed info by queryString: ", parse);
-//     }
-
-//     render() {
-//         return <div>Hi this is where your form will be</div>;
-//     }
-// }
 
 export default Form;
