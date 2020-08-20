@@ -7,6 +7,7 @@ import Landing from "./Landing";
 import "materialize-css/dist/css/materialize.min.css";
 import Dashboard from "./Dashboard";
 import SurveyNew from "./Surveys/SurveyNew";
+import Form from "./FeedBack/Form";
 
 class App extends Component {
     componentDidMount() {
@@ -20,6 +21,8 @@ class App extends Component {
                     <Route exact path="/" component={Landing} />
                     <Route exact path="/surveys" component={Dashboard} />
                     <Route exact path="/surveys/new" component={SurveyNew} />
+                    {/* //TODO:create a URL that is destructurable /?foo=unicorn&ilike=pizza */}
+                    <Route path="/feedback" component={Form} />
                 </Router>
             </div>
         );

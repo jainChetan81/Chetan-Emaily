@@ -5,7 +5,6 @@ const keys = require("../config/keys");
 class Mailer extends helper.Mail {
     constructor({ subject, recipients }, content) {
         super();
-        console.log("Mailer.js : ", recipients);
         this.sgApi = sendgrid(keys.sendGridKey);
         this.from_email = new helper.Email("jain.cj.chetan@gmail.com");
         this.subject = subject;
@@ -46,12 +45,11 @@ class Mailer extends helper.Mail {
             path: "/v3/mail/send",
             body: this.toJSON(),
         });
-        console.log("the request is : ", request);
 
         this.sgApi
             .API(request)
             .then((response) => {
-                console.log("final response is :", response);
+                console.log("final response is :", response.statusCode);
                 return response;
             })
             .catch((err) => console.log("error in response is :", err));

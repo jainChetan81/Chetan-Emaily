@@ -13,6 +13,7 @@ const express = require("express"),
 require("./models/User");
 require("./models/Survey");
 require("./services/passport");
+require("./models/FeedBack");
 mongoose.connect(keys.mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

@@ -3,14 +3,12 @@ module.exports = (survey) => {
     return ` <html>
             <body>
                 <div style={{ textAlign: "center" }}>
-                    <h3>I'd Like your Input</h3>
+                    <h3>${survey.title}</h3>
                     <p>Please answer the following question</p>
                     <p>${survey.body}</p>
-                    <div className="">
-                        <a href="${keys.redirectDomain}/api/surveys/thanx">Yes</a>
-                    </div>
-                    <div className="">
-                        <a href="${keys.redirectDomain}/api/surveys/thanx">No</a>
+                    <div >
+                        <a href="${keys.redirectDomain}/feedback/?surveyId=${survey.id}&mail=dangerxkills@gmail.com">Yes</a>
+                        //TODO:URL must which have FeedBackForm Id and user's email address
                     </div>
                 </div>
             </body>
