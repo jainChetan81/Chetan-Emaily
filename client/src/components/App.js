@@ -21,7 +21,6 @@ class App extends Component {
                     <Route exact path="/" component={Landing} />
                     <Route exact path="/surveys" component={Dashboard} />
                     <Route exact path="/surveys/new" component={SurveyNew} />
-                    {/* //TODO:create a URL that is destructurable /?foo=unicorn&ilike=pizza */}
                     <Route path="/feedback" component={Form} />
                 </Router>
             </div>

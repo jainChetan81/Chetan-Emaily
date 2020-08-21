@@ -11,9 +11,27 @@ export const handleToken = (token) => async (dispatch) => {
         dispatch({ type: FETCH_USER, payload: res.data });
     });
 };
-export const submitSurvey = (values, history) => (dispatch) => {
-    axios.post("/api/surveys", values).then((res) => {
-        // history.push("/surveys");
-        dispatch({ type: FETCH_USER, payload: res.data });
-    });
+export const submitSurvey = (questionFormValues, surveyFormValue, history) => (
+    dispatch
+) => {
+    axios
+        .post("/api/surveys", {
+            questions: questionFormValues,
+            surveys: surveyFormValue,
+        })
+        .then((res) => {
+            // history.push("/surveys");
+            dispatch({ type: FETCH_USER, payload: res.data });
+        });
+};
+export const submitFeedback = (feedbackFormValues, history) => (dispatch) => {
+    axios
+        .post("/api/feedback", {
+            feedback: feedbackFormValues,
+        })
+        .then((res) => {
+            console.log(res.data);
+            // history.push("/");
+            // dispatch({ type: FETCH_USER, payload: res.data });
+        });
 };

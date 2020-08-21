@@ -1,6 +1,3 @@
-const _ = require("lodash");
-const Path = require("path-parser");
-const { URL } = require("url");
 const mongoose = require("mongoose"),
     requireLogin = require("../middlewares/requireLogin"),
     requireCredits = require("../middlewares/requireCredits"),
@@ -23,8 +20,8 @@ module.exports = (app) => {
     });
 
     app.post("/api/surveys", requireLogin, requireCredits, async (req, res) => {
-        const { title, subject, body, recipients } = req.body;
-
+        const { questions, surveys } = req.body;
+        const { title, subject, body, recipients } = surveys;
         const survey = new Survey({
             title,
             subject,
@@ -36,18 +33,21 @@ module.exports = (app) => {
             dateSent: Date.now(),
         });
         const feedback = new FeedBack();
-        feedback.question1 = "Is Your Name Chetan? ";
-        console.log("survey is : ", survey);
-        // Great place to send an email!
+        for (i in questions) {
+            if (i === "question1") feedback.question1 = questions.question1;
+            else {
+                feedback.Questions.push({ question: questions[i] });
+            }
+        }
+        console.log("feedback is :", feedback);
         const mailer = new Mailer(survey, surveyTemplate(survey, feedback));
-        //TODO: filter out recipient's email/id and send it to surveyTemplates
+        // //TODO: filter out recipient's email/id and send it to surveyTemplates
         try {
             await mailer.send();
-            // await survey.save();
+            // // await survey.save();
             await feedback.save();
             req.user.credits -= 1;
             const user = await req.user.save();
-
             res.send(user);
         } catch (err) {
             res.status(422).send(err);

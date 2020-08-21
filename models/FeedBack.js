@@ -1,19 +1,16 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-//TODO: create a model for feedback form which takes questions and return answers
+const QuestionSchema = require("./Questions");
 let feedbackSchema = new Schema({
     question1: {
         type: String,
         required: true,
-    },
-    question2: {
-        type: String,
-        required: false,
         answer: {
-            type: Boolean,
+            type: String,
             default: null,
         },
     },
+    Questions: [QuestionSchema],
     _user: { type: Schema.Types.ObjectId, ref: "User" },
     dateSent: Date,
     lastResponded: Date,
