@@ -33,8 +33,11 @@ module.exports = (app) => {
             dateSent: Date.now(),
         });
         const feedback = new FeedBack();
+        feedback._user = req.user.id;
+        feedback._survey = survey._id;
         for (i in questions) {
-            if (i === "question1") feedback.question1 = questions.question1;
+            if (i === "question1")
+                feedback.question1.question = questions.question1;
             else {
                 feedback.Questions.push({ question: questions[i] });
             }
@@ -44,7 +47,7 @@ module.exports = (app) => {
         // //TODO: filter out recipient's email/id and send it to surveyTemplates
         try {
             await mailer.send();
-            // // await survey.save();
+            await survey.save();
             await feedback.save();
             req.user.credits -= 1;
             const user = await req.user.save();

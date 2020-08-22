@@ -9,6 +9,7 @@ const FeedBackFormReview = ({
     submitFeedback,
     history,
     feedbackFormValues,
+    feedBackId,
 }) => {
     const feedbackFields = () => {
         console.log("formValues :", feedbackFormValues);
@@ -41,7 +42,7 @@ const FeedBackFormReview = ({
             </div>
             <div className="row">
                 <div className="col s6">
-                    <h5>Q1 : {feedbackQuestions[0].question1}</h5>
+                    <h5>Q1 : {feedbackQuestions[0].question1.question}</h5>
                 </div>
                 <div
                     className="col s6 right-align"
@@ -57,7 +58,14 @@ const FeedBackFormReview = ({
                 Back
             </button>
             <button
-                onClick={() => submitFeedback(feedbackFormValues, history)}
+                onClick={() =>
+                    submitFeedback(
+                        feedbackFormValues,
+                        history,
+                        feedbackQuestions[0]._survey,
+                        feedBackId
+                    )
+                }
                 className="green btn-flat right white-text">
                 Send FeedBack
                 <i className="material-icons right">email</i>

@@ -3,16 +3,14 @@ const Schema = mongoose.Schema;
 const QuestionSchema = require("./Questions");
 let feedbackSchema = new Schema({
     question1: {
-        type: String,
-        required: true,
-        answer: {
-            type: String,
-            default: null,
-        },
+        question: { type: String, required: true },
+        Yes: { type: Number, default: 0 },
+        No: { type: Number, default: 0 },
     },
     Questions: [QuestionSchema],
     _user: { type: Schema.Types.ObjectId, ref: "User" },
-    dateSent: Date,
+    _survey: { type: Schema.Types.ObjectId, ref: "Survey" },
+    dateSent: { type: Date, default: Date.now() },
     lastResponded: Date,
 });
 

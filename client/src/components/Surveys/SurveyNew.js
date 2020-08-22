@@ -38,7 +38,7 @@ class SurveyNew extends Component {
                 />
             );
         }
-        if ((this.state.show = "showQuestionsReview")) {
+        if (this.state.show === "showQuestionsReview") {
             return (
                 <QuestionFormReview
                     onCancel={() => this.setState({ show: "showQuestions" })}

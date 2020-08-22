@@ -5,22 +5,25 @@ import FeedBackNew from "./FeedBackNew";
 
 const Form = ({ location }) => {
     const [feedbackQuestions, setFeedbackQuestions] = useState(null);
+    const [feedbackId, setFeedbackId] = useState(null);
     useEffect(() => {
         const { feedBackId } = queryString.parse(location.search);
+        setFeedbackId(feedBackId);
         axios
             .post("/api/feedbackForm", { feedback_id: feedBackId })
             .then((res) => {
                 setFeedbackQuestions(res.data);
             })
             .catch((err) => console.log("error in feedback Form.js: ", err));
-        return () => {
-            console.log("");
-        };
+        return () => {};
     }, [location.search]);
     return (
         <div>
             {feedbackQuestions ? (
-                <FeedBackNew feedbackQuestions={feedbackQuestions} />
+                <FeedBackNew
+                    feedBackId={feedbackId}
+                    feedbackQuestions={feedbackQuestions}
+                />
             ) : (
                 <h1>Loading...</h1>
             )}

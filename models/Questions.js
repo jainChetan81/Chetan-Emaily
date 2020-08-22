@@ -3,10 +3,8 @@ const { Schema } = mongoose;
 
 const QuestionSchema = new Schema({
     question: String,
-    answer: {
-        type: String,
-        default: null,
-    },
+    Yes: { type: Number, default: 0 },
+    No: { type: Number, default: 0 },
 });
 
 module.exports = QuestionSchema;

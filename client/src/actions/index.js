@@ -24,10 +24,18 @@ export const submitSurvey = (questionFormValues, surveyFormValue, history) => (
             dispatch({ type: FETCH_USER, payload: res.data });
         });
 };
-export const submitFeedback = (feedbackFormValues, history) => (dispatch) => {
+export const submitFeedback = (
+    feedbackFormValues,
+    history,
+    surveyId,
+    feedBackId
+) => (dispatch) => {
+    console.log("feedback iD", feedBackId);
     axios
         .post("/api/feedback", {
             feedback: feedbackFormValues,
+            surveyId: surveyId,
+            feedBackId: feedBackId,
         })
         .then((res) => {
             console.log(res.data);

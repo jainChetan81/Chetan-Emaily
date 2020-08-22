@@ -4,6 +4,7 @@ import FeedBackForm from "./FeedBackForm";
 import FeedBackFormReview from "./FeedBackFormReview";
 
 class FeedBackNew extends Component {
+
     state = { show: false };
 
     renderContent() {
@@ -18,6 +19,7 @@ class FeedBackNew extends Component {
         if (this.state.show) {
             return (
                 <FeedBackFormReview
+                    feedBackId={this.props.feedBackId}
                     feedbackQuestions={this.props.feedbackQuestions}
                     onCancel={() => this.setState({ show: false })}
                 />

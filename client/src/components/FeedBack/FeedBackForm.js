@@ -63,7 +63,11 @@ class FeedBackForm extends Component {
                     <div className="row">
                         <div className="col s6">
                             <h5>
-                                Q1 : {this.props.feedbackQuestions[0].question1}
+                                Q1 :{" "}
+                                {
+                                    this.props.feedbackQuestions[0].question1
+                                        .question
+                                }
                             </h5>
                         </div>
                         <div
