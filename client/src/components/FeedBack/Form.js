@@ -4,6 +4,7 @@ import queryString from "query-string";
 import FeedBackNew from "./FeedBackNew";
 
 const Form = ({ location }) => {
+    //TODO: Show errors from the servers
     const [feedbackQuestions, setFeedbackQuestions] = useState(null);
     const [feedbackId, setFeedbackId] = useState(null);
     useEffect(() => {
@@ -12,7 +13,8 @@ const Form = ({ location }) => {
         axios
             .post("/api/feedbackForm", { feedback_id: feedBackId })
             .then((res) => {
-                setFeedbackQuestions(res.data);
+                if (!res.data.errorMessage) setFeedbackQuestions(res.data);
+                else console.log(res.data.errorMessage);
             })
             .catch((err) => console.log("error in feedback Form.js: ", err));
         return () => {};

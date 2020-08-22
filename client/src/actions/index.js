@@ -20,8 +20,8 @@ export const submitSurvey = (questionFormValues, surveyFormValue, history) => (
             surveys: surveyFormValue,
         })
         .then((res) => {
-            // history.push("/surveys");
             dispatch({ type: FETCH_USER, payload: res.data });
+            history.push("/surveys");
         });
 };
 export const submitFeedback = (
@@ -30,7 +30,6 @@ export const submitFeedback = (
     surveyId,
     feedBackId
 ) => (dispatch) => {
-    console.log("feedback iD", feedBackId);
     axios
         .post("/api/feedback", {
             feedback: feedbackFormValues,
@@ -38,8 +37,15 @@ export const submitFeedback = (
             feedBackId: feedBackId,
         })
         .then((res) => {
-            console.log(res.data);
-            // history.push("/");
+            if (res.data.error) {
+                console.log("error messages : ", res.data.errorMessage);
+                //TODO: Create a Error State
+                //TODO: Let USers see all the errors
+            }
+            if (!res.data.error) {
+                console.log(res.data.successMessage);
+                history.push("/");
+            }
             // dispatch({ type: FETCH_USER, payload: res.data });
         });
 };

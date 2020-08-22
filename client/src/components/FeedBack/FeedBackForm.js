@@ -1,5 +1,3 @@
-//TODO: send post api which will save the questions answered
-
 import { reduxForm, Field } from "redux-form";
 import React, { Component } from "react";
 
@@ -116,7 +114,7 @@ function validate(values) {
     // });
 
     return errors;
-}
+} //TODO: SHow Validation Error
 export default reduxForm({
     validate,
     form: "feedbackForm",

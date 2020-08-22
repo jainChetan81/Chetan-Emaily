@@ -12,8 +12,6 @@ const FeedBackFormReview = ({
     feedBackId,
 }) => {
     const feedbackFields = () => {
-        console.log("formValues :", feedbackFormValues);
-        console.log("questions: ", feedbackQuestions);
         return feedbackQuestions[0].Questions.map((form, index) => {
             const group = "group" + index;
             return (
