@@ -27,34 +27,46 @@ module.exports = (app) => {
         const { feedback, surveyId, feedBackId } = req.body;
         let emailExist = false;
         let errorMessage = [];
-        console.log(feedback, surveyId, feedBackId);
-        Survey.findById(surveyId)
+        let error = false;
+        await Survey.findById(surveyId)
             .then((survey) => {
                 if (survey) {
                     survey.recipients.find((ele) => {
                         if (ele.email === feedback.email) {
                             if (ele.responded) {
+                                console.log("you have already responded");
                                 errorMessage.push(
                                     "You have already submitted your review"
                                 );
+                                error = true;
                                 return res.send({
                                     error: true,
                                     errorMessage,
                                 });
                             }
-                            if (!ele.responded) ele.responded = true;
+                            if (!ele.responded) {
+                                error = false;
+                                ele.responded = true;
+                            }
                             emailExist = true;
                         }
                     });
-                    if (emailExist && !errorMessage)
+                    if (emailExist && !error) {
+                        console.log("saving your response");
                         survey.save().catch((err) => {
+                            console.log("Server Error, Please try again");
+                            error = true;
                             errorMessage.push("Server Error, Please try again");
                             return res.send({
-                                error: err,
+                                error: true,
                                 errorMessage,
                             });
                         });
-                    if (!emailExist) {
+                    } else {
+                        error = true;
+                        console.log(
+                            "You Are Not Eligible for participating on this Survey"
+                        );
                         errorMessage.push(
                             "You Are Not Eligible for participating on this Survey"
                         );
@@ -66,15 +78,13 @@ module.exports = (app) => {
                 }
             })
             .catch((err) => {
+                error = true;
+                console.log(err);
                 errorMessage.push(
                     "Please Reclick on Feedback Link Provided on Your Mail ID"
                 );
-                return res.send({
-                    error: err,
-                    errorMessage,
-                });
             });
-        if (emailExist && !errorMessage) {
+        if (emailExist && !error) {
             FeedBack.findById(feedBackId)
                 .then((fdbk) => {
                     if (fdbk) {
@@ -95,6 +105,7 @@ module.exports = (app) => {
                         console.log("feedback fdbk : ", fdbk);
                         fdbk.save()
                             .then(() => {
+                                error = false;
                                 console.log("FeedBack is Added");
                                 return res.send({
                                     error: false,
@@ -102,6 +113,7 @@ module.exports = (app) => {
                                 });
                             })
                             .catch((err) => {
+                                error = true;
                                 errorMessage.push(
                                     "error with saving Your Response"
                                 );
@@ -113,6 +125,7 @@ module.exports = (app) => {
                     }
                 })
                 .catch((err) => {
+                    error = true;
                     errorMessage.push(
                         "Server Error, Please Click on Link Provided in You Mail again"
                     );
