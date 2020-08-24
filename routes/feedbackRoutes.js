@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 require("../models/Survey");
 const Survey = mongoose.model("Survey");
 const FeedBack = require("../models/FeedBack");
+const requireLogin = require("../middlewares/requireLogin");
 module.exports = (app) => {
     app.post("/api/feedbackForm", async (req, res) => {
         const { feedback_id } = req.body;
@@ -22,6 +23,10 @@ module.exports = (app) => {
                 }
             }
         );
+    });
+    app.get("/api/feedbacks", requireLogin, async (req, res) => {
+        const feedbacks = await FeedBack.find({ _user: req.user.id });
+        res.send(feedbacks);
     });
     app.post("/api/feedback", async (req, res) => {
         const { feedback, surveyId, feedBackId } = req.body;
