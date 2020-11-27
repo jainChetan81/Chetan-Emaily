@@ -4,13 +4,14 @@ import { fetchSurveys, fetchFeedbacks } from "../../actions";
 
 class SurveyList extends Component {
     async componentDidMount() {
-        this.props.fetchSurveys();
+        await this.props.fetchSurveys();
         await this.props.fetchFeedbacks();
         console.log(this.props.feedbacks.length);
     }
 
     renderSurveys() {
-        const { feedbacks } = this.props;
+        // const { feedbacks } = this.props;
+        console.log(this.props.surveys);
         return this.props.surveys.reverse().map((survey) => {
             return (
                 <div className="card darken-1" key={survey._id}>

@@ -21,22 +21,27 @@ passport.use(
             proxy: true,
         },
         (accessToken, refreshToken, profile, done) => {
-            User.findOne({ googleId: profile.id }).then((existingUser) => {
-                if (existingUser) {
-                    console.log("the user exists : ", existingUser.name);
-                    done(null, existingUser); //null means no error
-                    //done means we are done here
-                }
-                if (!existingUser) {
-                    console.log("we have a new user : ", profile.displayName);
-                    new User({
-                        googleId: profile.id,
-                        name: profile.displayName,
-                    })
-                        .save()
-                        .then((user) => done(null, user));
-                }
-            });
+            User.findOne({ googleId: profile.id })
+                .then((existingUser) => {
+                    if (existingUser) {
+                        console.log("the user exists : ", existingUser.name);
+                        done(null, existingUser); //null means no error
+                        //done means we are done here
+                    }
+                    if (!existingUser) {
+                        console.log(
+                            "we have a new user : ",
+                            profile.displayName
+                        );
+                        new User({
+                            googleId: profile.id,
+                            name: profile.displayName,
+                        })
+                            .save()
+                            .then((user) => done(null, user));
+                    }
+                })
+                .catch((err) => console.log(err));
         }
     )
 );

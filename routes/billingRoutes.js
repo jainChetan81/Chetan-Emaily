@@ -17,6 +17,7 @@ module.exports = (app) => {
                 req.user.save().then((user) => {
                     res.send(user);
                 });
-            });
+            })
+            .catch((err) => console.log(err));
     });
 };

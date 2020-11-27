@@ -21,20 +21,28 @@ export const submitSurvey = (questionFormValues, surveyFormValue, history) => (
         })
         .then((res) => {
             dispatch({ type: FETCH_USER, payload: res.data });
-            history.push("/surveys");
-        });
+            console.log("res", res);
+            // history.push("/surveys");
+        })
+        .catch((err) => console.log(err));
 };
-export const fetchSurveys = () => async (dispatch) => {
-    await axios.get("/api/surveys").then((res) => {
-        console.log(res.data);
-        dispatch({ type: FETCH_SURVEYS, payload: res.data });
-    });
+export const fetchSurveys = () => (dispatch) => {
+    axios
+        .get("/api/surveys")
+        .then((res) => {
+            console.log(res.data);
+            dispatch({ type: FETCH_SURVEYS, payload: res.data });
+        })
+        .catch((err) => console.log(err));
 };
-export const fetchFeedbacks = () => async (dispatch) => {
-    await axios.get("/api/feedbacks").then((res) => {
-        console.log(res.data);
-        dispatch({ type: FETCH_FEEDBACKS, payload: res.data });
-    });
+export const fetchFeedbacks = () => (dispatch) => {
+    axios
+        .get("/api/feedbacks")
+        .then((res) => {
+            console.log(res.data);
+            dispatch({ type: FETCH_FEEDBACKS, payload: res.data });
+        })
+        .catch((err) => console.log(err));
 };
 export const submitFeedback = (
     feedbackFormValues,
@@ -55,9 +63,11 @@ export const submitFeedback = (
                 //TODO: Let USers see all the errors
             }
             if (!res.data.error) {
+                console.log("res.data", res.data);
                 console.log(res.data.successMessage);
                 history.push("/");
             }
             // dispatch({ type: FETCH_USER, payload: res.data });
-        });
+        })
+        .catch((err) => console.log(err));
 };

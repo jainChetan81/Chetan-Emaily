@@ -4,6 +4,7 @@ const keys = require("../config/keys");
 
 class Mailer extends helper.Mail {
     constructor({ subject, recipients }, content) {
+        console.log("subject", subject);
         super();
         this.sgApi = sendgrid(keys.sendGridKey);
         this.from_email = new helper.Email("jain.cj.chetan@gmail.com");
@@ -39,10 +40,20 @@ class Mailer extends helper.Mail {
         this.sgApi
             .API(request)
             .then((response) => {
-                console.log("final response is :", response.statusCode);
+                console.log("01");
+                console.log(response.statusCode);
+                console.log("02");
+                console.log(response.body);
+                console.log("03");
+                console.log(response.headers);
                 return response;
             })
-            .catch((err) => console.log("error in response is :", err));
+            .catch((error) => {
+                // error is an instance of SendGridError
+                // The full response is attached to error.response
+                console.log("05");
+                console.log(error.response.statusCode);
+            });
     }
 }
 
