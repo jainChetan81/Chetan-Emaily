@@ -50,11 +50,8 @@ module.exports = (app) => {
                             }
                             if (!ele.responded) {
                                 //? so the user has not responded
-                                feedbackUpdate(
-                                    feedBackId,
-                                    feedback,
-                                    errorMessage
-                                );
+                                //prettier-ignore
+                                feedbackUpdate(feedBackId, feedback, errorMessage, res );
                                 ele.responded = true; //? confirming the user has responded
                             }
                         }
@@ -65,10 +62,7 @@ module.exports = (app) => {
                             //?saving the user response
                             console.log("Server Error, Please try again", err);
                             errorMessage.push("Server Error, Please try again");
-                            return res.send({
-                                error: true,
-                                errorMessage,
-                            });
+                            return res.send({ error: true, errorMessage });
                         });
                     }
                     if (!emailExist) {
@@ -87,12 +81,9 @@ module.exports = (app) => {
                 console.log(err);
                 errorMessage.push("Please Reclick on Feedback Link Provided");
             });
-        // console.log(emailExist, !error);
-        // if (emailExist && !error) {
-        // }
     });
 };
-const feedbackUpdate = (feedBackId, feedback, errorMessage) => {
+const feedbackUpdate = (feedBackId, feedback, errorMessage, res) => {
     console.log("inside feedback");
     FeedBack.findById(feedBackId)
         .then((fdbk) => {

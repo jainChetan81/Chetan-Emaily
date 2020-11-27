@@ -22,7 +22,7 @@ export const submitSurvey = (questionFormValues, surveyFormValue, history) => (
         .then((res) => {
             dispatch({ type: FETCH_USER, payload: res.data });
             console.log("res", res);
-            // history.push("/surveys");
+            history.push("/surveys");
         })
         .catch((err) => console.log(err));
 };
@@ -63,7 +63,6 @@ export const submitFeedback = (
                 //TODO: Let USers see all the errors
             }
             if (!res.data.error) {
-                console.log("res.data", res.data);
                 console.log(res.data.successMessage);
                 history.push("/");
             }
