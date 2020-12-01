@@ -36,15 +36,23 @@ module.exports = (app) => {
         feedback._user = req.user.id;
         feedback._survey = survey._id;
         for (i in questions) {
-            if (i === "question1")
+            //? saving questions in feedback form and recipient part of survey form
+            if (i === "question1") {
                 feedback.question1.question = questions.question1;
-            else {
+                survey.recipients.map((j) => {
+                    j.answer1.question = questions.question1;
+                });
+            } else {
                 feedback.Questions.push({ question: questions[i] });
+                survey.recipients.map((j) => {
+                    j.Answers.push({ question: questions[i] });
+                });
             }
         }
         console.log("feedback is :", feedback);
+        console.log("survey is :", survey.recipients[0]);
         const mailer = new Mailer(survey, surveyTemplate(survey, feedback));
-        // //TODO: filter out recipient's email/id and send it to surveyTemplates
+        //TODO: filter out recipient's email/id and send it to surveyTemplates
         try {
             await mailer.send();
             await survey.save();

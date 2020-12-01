@@ -88,7 +88,6 @@ const feedbackUpdate = (feedBackId, feedback, errorMessage, res) => {
     FeedBack.findById(feedBackId)
         .then((fdbk) => {
             if (fdbk) {
-                console.log("feedback", feedback);
                 console.log("fdbk", fdbk);
                 const { email, group, group0, group1 } = feedback;
                 fdbk.question1[group]++;

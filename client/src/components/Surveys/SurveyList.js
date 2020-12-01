@@ -23,22 +23,22 @@ class SurveyList extends Component {
                             {new Date(survey.dateSent).toLocaleDateString()}
                         </p>
                     </div>
-                    <div class="card-tabs">
-                        <ul class="tabs tabs-fixed-width">
-                            <li class="tab">
+                    <div className="card-tabs">
+                        <ul className="tabs tabs-fixed-width">
+                            <li className="tab">
                                 <a href="#test10">Q1 :</a>
                             </li>
-                            <li class="tab">
-                                <a class="active" href="#test5">
+                            <li className="tab">
+                                <a className="active" href="#test5">
                                     Test 2
                                 </a>
                             </li>
-                            <li class="tab">
+                            <li className="tab">
                                 <a href="#test6">Test 3</a>
                             </li>
                         </ul>
                     </div>
-                    <div class="card-content grey lighten-4">
+                    <div className="card-content grey lighten-4">
                         {/* <div id="test10">
                             {feedbacks[1].question1.question} Yes:{" "}
                             {feedbacks[1].question1.Yes} No:{" "}
