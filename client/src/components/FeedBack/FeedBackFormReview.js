@@ -10,6 +10,7 @@ const FeedBackFormReview = ({
     history,
     feedbackFormValues,
     feedBackId,
+    feedbackError,
 }) => {
     const feedbackFields = () => {
         return feedbackQuestions[0].Questions.map((form, index) => {
@@ -50,6 +51,10 @@ const FeedBackFormReview = ({
             </div>
 
             {feedbackFields()}
+            <div className="red-text" style={{ marginBottom: "20px" }}>
+                {/* {feedbackError.errorMessage.map((i) => i)} */}
+                {feedbackError.errorMessage}
+            </div>
             <button
                 className="yellow darken-3 white-text btn-flat"
                 onClick={onCancel}>
@@ -74,6 +79,7 @@ const FeedBackFormReview = ({
 function mapStateToProps(state) {
     return {
         feedbackFormValues: state.form.feedbackForm.values,
+        feedbackError: state.feedbackError,
     };
 }
 

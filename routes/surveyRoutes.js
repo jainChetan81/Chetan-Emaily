@@ -49,8 +49,8 @@ module.exports = (app) => {
                 });
             }
         }
-        console.log("feedback is :", feedback);
-        console.log("survey is :", survey.recipients[0]);
+        // console.log("feedback is :", feedback);
+        // console.log("survey is :", survey.recipients[0]);
         const mailer = new Mailer(survey, surveyTemplate(survey, feedback));
         //TODO: filter out recipient's email/id and send it to surveyTemplates
         try {

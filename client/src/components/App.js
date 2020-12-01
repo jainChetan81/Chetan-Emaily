@@ -40,7 +40,7 @@ class App extends Component {
     }
 }
 
-function mapStateToProps({ auth }) {
-    return { auth: auth };
+function mapStateToProps(state) {
+    return { auth: state.auth };
 }
 export default connect(mapStateToProps, actions)(App);

@@ -1,5 +1,10 @@
 import axios from "axios";
-import { FETCH_USER, FETCH_SURVEYS, FETCH_FEEDBACKS } from "./types";
+import {
+    FETCH_USER,
+    FETCH_SURVEYS,
+    FETCH_FEEDBACKS,
+    ERROR_FEEDBACK,
+} from "./types";
 
 export const fetchUser = () => (dispatch) => {
     axios.get("/api/current_user").then((res) => {
@@ -44,6 +49,7 @@ export const fetchFeedbacks = () => (dispatch) => {
         })
         .catch((err) => console.log(err));
 };
+
 export const submitFeedback = (
     feedbackFormValues,
     history,
@@ -58,9 +64,10 @@ export const submitFeedback = (
         })
         .then((res) => {
             if (res.data.error) {
-                console.log("error messages : ", res.data.errorMessage);
+                console.log("error messages : ", res.data);
                 //TODO: Create a Error State
                 //TODO: Let USers see all the errors
+                dispatch({ type: ERROR_FEEDBACK, payload: res.data });
             }
             if (!res.data.error) {
                 console.log(res.data.successMessage);
