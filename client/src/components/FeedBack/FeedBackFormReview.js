@@ -2,6 +2,8 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const FeedBackFormReview = ({
     feedbackQuestions,
@@ -12,6 +14,18 @@ const FeedBackFormReview = ({
     feedBackId,
     feedbackError,
 }) => {
+    const sendFeedback = () => {
+        toast("Wow so easy !");
+        setTimeout(() => {
+            // submitFeedback(
+            //     feedbackFormValues,
+            //     history,
+            //     feedbackQuestions[0]._survey,
+            //     feedBackId
+            // );
+        }, 3000);
+    };
+
     const feedbackFields = () => {
         return feedbackQuestions[0].Questions.map((form, index) => {
             const group = "group" + index;
@@ -31,6 +45,7 @@ const FeedBackFormReview = ({
             );
         });
     };
+
     return (
         <div>
             {/* // TODO:showcase the questions for review */}
@@ -61,18 +76,22 @@ const FeedBackFormReview = ({
                 Back
             </button>
             <button
-                onClick={() =>
-                    submitFeedback(
-                        feedbackFormValues,
-                        history,
-                        feedbackQuestions[0]._survey,
-                        feedBackId
-                    )
-                }
+                onClick={() => sendFeedback()}
                 className="green btn-flat right white-text">
                 Send FeedBack
                 <i className="material-icons right">email</i>
             </button>
+            <ToastContainer
+                position="bottom-left"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss={false}
+                draggable={false}
+                pauseOnHover={false}
+            />
         </div>
     );
 };

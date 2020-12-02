@@ -4,7 +4,7 @@ import Header from "./Header";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import Landing from "./Landing";
-import "materialize-css/dist/css/materialize.min.css";
+ import "materialize-css/dist/css/materialize.min.css";
 import Dashboard from "./Dashboard";
 import SurveyNew from "./Surveys/SurveyNew";
 import Form from "./FeedBack/Form";
