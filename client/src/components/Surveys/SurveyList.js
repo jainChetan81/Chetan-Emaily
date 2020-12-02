@@ -6,13 +6,11 @@ class SurveyList extends Component {
     async componentDidMount() {
         await this.props.fetchSurveys();
         await this.props.fetchFeedbacks();
-        console.log(this.props.feedbacks.length);
     }
 
     renderSurveys() {
-        // const { feedbacks } = this.props;
-        console.log(this.props.surveys);
-        return this.props.surveys.reverse().map((survey) => {
+        const { feedbacks } = this.props;
+        return this.props.surveys.reverse().map((survey, index) => {
             return (
                 <div className="card darken-1" key={survey._id}>
                     <div className="card-content">
@@ -24,28 +22,41 @@ class SurveyList extends Component {
                         </p>
                     </div>
                     <div className="card-tabs">
-                        <ul className="tabs tabs-fixed-width">
-                            <li className="tab">
-                                <a href="#test10">Q1 :</a>
+                        <ul className="collection">
+                            <li className="collection-item ">
+                                <div className="row">
+                                    <div className="col s10">
+                                        Q1:{" "}
+                                        {feedbacks[index]?.question1.question}
+                                    </div>
+                                    <div className="col s1">
+                                        N: {feedbacks[index]?.question1.Yes}
+                                    </div>
+                                    <div className="col s1">
+                                        Y: {feedbacks[index]?.question1.No}
+                                    </div>
+                                </div>
                             </li>
-                            <li className="tab">
-                                <a className="active" href="#test5">
-                                    Test 2
-                                </a>
-                            </li>
-                            <li className="tab">
-                                <a href="#test6">Test 3</a>
-                            </li>
+                            {feedbacks[index]?.Questions.map((ques, index) => {
+                                return (
+                                    <li
+                                        className="collection-item"
+                                        key={ques._id}>
+                                        <div className="row">
+                                            <div className="col s10">
+                                                Q{index + 1}: {ques.question}
+                                            </div>
+                                            <div className="col s1">
+                                                N: {ques.Yes}
+                                            </div>
+                                            <div className="col s1">
+                                                Y: {ques.No}
+                                            </div>
+                                        </div>
+                                    </li>
+                                );
+                            })}
                         </ul>
-                    </div>
-                    <div className="card-content grey lighten-4">
-                        {/* <div id="test10">
-                            {feedbacks[1].question1.question} Yes:{" "}
-                            {feedbacks[1].question1.Yes} No:{" "}
-                            {feedbacks[1].question1.No}
-                        </div> */}
-                        <div id="test5">Test 2</div>
-                        <div id="test6">Test 3</div>
                     </div>
                 </div>
             );

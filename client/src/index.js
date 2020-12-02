@@ -17,6 +17,5 @@ ReactDOM.render(
     document.getElementById("root")
 );
 serviceWorker.unregister();
-//TODO: ensure any broken or half link doesn't get any errors(like /feedback or /surveys)
 //TODO: add error fields in question form
-//TODO: visuals for data collected but don't show personal data for all feedbacks
+//TODO: visuals for feedback collection but don't show personal choices for all feedbacks
