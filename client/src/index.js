@@ -18,6 +18,5 @@ ReactDOM.render(
 );
 serviceWorker.unregister();
 //TODO: remove surveys link from landing page
-//TODO: improve routes so user don't have to go to survey router evertime
 //TODO: add error fields in question form
 //TODO: visuals for data collected but don't show personal data for all feedbacks
