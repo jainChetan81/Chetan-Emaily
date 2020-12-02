@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Header from "./Header";
 import { connect } from "react-redux";
 import * as actions from "../actions";
@@ -17,25 +17,30 @@ class App extends Component {
     render() {
         return (
             <div className="container">
-                <Router>
+                <BrowserRouter>
                     <Header />
-                    <Route exact path="/" component={Landing} />
-                    {this.props.auth && (
-                        <>
-                            <Route
-                                exact
-                                path="/surveys"
-                                component={Dashboard}
-                            />
-                            <Route
-                                exact
-                                path="/surveys/new"
-                                component={SurveyNew}
-                            />
-                        </>
-                    )}
-                    <Route path="/feedback" component={Form} />
-                </Router>
+                    <Switch>
+                        <Route exact path="/feedback" component={Form} />
+                        {!this.props.auth && (
+                            <Route exact path="/" component={Landing} />
+                        )}
+                        {this.props.auth && (
+                            <>
+                                <Route
+                                    exact
+                                    path="/surveys"
+                                    component={Dashboard}
+                                />
+                                <Route
+                                    exact
+                                    path="/surveys/new"
+                                    component={SurveyNew}
+                                />
+                                <Redirect to="/surveys" />
+                            </>
+                        )}
+                    </Switch>
+                </BrowserRouter>
             </div>
         );
     }
