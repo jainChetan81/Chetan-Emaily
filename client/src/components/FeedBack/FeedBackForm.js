@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 class FeedBackForm extends Component {
     renderQuestions() {
-        return this.props.feedbackQuestions[0].Questions.map((form, index) => {
+        return this.props.feedbackQuestions[0]?.Questions.map((form, index) => {
             const group = "group" + index;
             return (
                 <div className="row" key={index}>
@@ -63,7 +63,7 @@ class FeedBackForm extends Component {
                             <h5>
                                 Q1 :{" "}
                                 {
-                                    this.props.feedbackQuestions[0].question1
+                                    this.props.feedbackQuestions[0]?.question1
                                         .question
                                 }
                             </h5>

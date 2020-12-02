@@ -17,6 +17,6 @@ ReactDOM.render(
     document.getElementById("root")
 );
 serviceWorker.unregister();
-//TODO: remove surveys link from landing page
+//TODO: ensure any broken or half link doesn't get any errors(like /feedback or /surveys)
 //TODO: add error fields in question form
 //TODO: visuals for data collected but don't show personal data for all feedbacks

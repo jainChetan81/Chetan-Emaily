@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 import {
     FETCH_USER,
     FETCH_SURVEYS,
