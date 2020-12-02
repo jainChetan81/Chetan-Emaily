@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 import {
     FETCH_USER,
     FETCH_SURVEYS,
@@ -27,6 +28,10 @@ export const submitSurvey = (questionFormValues, surveyFormValue, history) => (
         .then((res) => {
             dispatch({ type: FETCH_USER, payload: res.data });
             console.log("res", res);
+            toast("Survey Sent");
+            setTimeout(() => {
+                history.push("/");
+            }, 3000);
             history.push("/surveys");
         })
         .catch((err) => console.log(err));
@@ -67,11 +72,16 @@ export const submitFeedback = (
                 console.log("error messages : ", res.data);
                 //TODO: Create a Error State
                 //TODO: Let USers see all the errors
+
+                toast("Wow so easy !");
                 dispatch({ type: ERROR_FEEDBACK, payload: res.data });
             }
             if (!res.data.error) {
                 console.log(res.data.successMessage);
-                history.push("/");
+                toast(res.data.successMessage);
+                setTimeout(() => {
+                    history.push("/");
+                }, 3000);
             }
             // dispatch({ type: FETCH_USER, payload: res.data });
         })

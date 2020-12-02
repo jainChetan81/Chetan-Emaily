@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const FeedBackFormReview = ({
     feedbackQuestions,
@@ -14,18 +13,6 @@ const FeedBackFormReview = ({
     feedBackId,
     feedbackError,
 }) => {
-    const sendFeedback = () => {
-        toast("Wow so easy !");
-        setTimeout(() => {
-            // submitFeedback(
-            //     feedbackFormValues,
-            //     history,
-            //     feedbackQuestions[0]._survey,
-            //     feedBackId
-            // );
-        }, 3000);
-    };
-
     const feedbackFields = () => {
         return feedbackQuestions[0].Questions.map((form, index) => {
             const group = "group" + index;
@@ -44,6 +31,15 @@ const FeedBackFormReview = ({
                 </div>
             );
         });
+    };
+
+    const sendFeedback = () => {
+        submitFeedback(
+            feedbackFormValues,
+            history,
+            feedbackQuestions[0]._survey,
+            feedBackId
+        );
     };
 
     return (
