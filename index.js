@@ -15,10 +15,12 @@ require("./models/User");
 require("./models/Survey");
 require("./models/FeedBack");
 require("./services/passport");
-mongoose.connect(keys.mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+mongoose
+    .connect(keys.mongoURI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .catch((err) => console.log("err: ", err));
 app.use(bodyParser.json());
 app.use(
     cookieSession({ maxAge: 30 * 24 * 60 * 60 * 1000, keys: [keys.cookie] })

@@ -27,7 +27,7 @@ const Form = (props) => {
             })
             .catch((err) => console.log("error in feedback Form.js: ", err));
         return () => {};
-    }, [props.location.search]);
+    }, [props.location.search, props.history]);
     return (
         <div>
             {feedbackQuestions ? (

@@ -18,4 +18,5 @@ ReactDOM.render(
 );
 serviceWorker.unregister();
 //TODO: add error fields in question form
-//TODO: visuals for feedback collection but don't show personal choices for all feedbacks
+//TODO: while going back to change reviews in question form fields enable customization
+
