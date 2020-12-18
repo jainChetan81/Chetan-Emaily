@@ -34,10 +34,10 @@ class SurveyList extends Component {
                                             }
                                         </div>
                                         <div className="col s1">
-                                            Y: {feedbacks[index]?.question1.Yes}
+                                            Y :{feedbacks[index]?.question1.Yes}
                                         </div>
                                         <div className="col s1">
-                                            N: {feedbacks[index]?.question1.No}
+                                            N :{feedbacks[index]?.question1.No}
                                         </div>
                                     </div>
                                 </li>
